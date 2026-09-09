@@ -1,4 +1,4 @@
-package com.stylemyoccasion.stylemyoccasion_bckend;
+package com.stylemyoccasion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

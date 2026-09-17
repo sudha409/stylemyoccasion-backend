@@ -7,11 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-
 
     @Autowired
     private UserService userService;
@@ -22,18 +23,18 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-
-    @GetMapping("/signup")
+    @GetMapping
     public ResponseEntity<List<User>> signupDetails() {
         List<User> response = userService.signupDetails();
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User request) {
-        User response = userService.login(request);
+    public ResponseEntity<?> login(@RequestBody User request) {
+        Map<String, Object> response = userService.login(request);
+        if (response == null) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid email or password"));
+        }
         return ResponseEntity.ok(response);
     }
-
-
 }
